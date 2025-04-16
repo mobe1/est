@@ -317,7 +317,7 @@ func (c *Client) ServerKeyGen(ctx context.Context, csr []byte) (*x509.Certificat
 		// body.
 		if ce := part.Header.Get(transferEncodingHeader); ce == "" {
 			return nil, nil, fmt.Errorf("missing %s header", transferEncodingHeader)
-		} else if !strings.EqualFold(ce, encodingTypeBase64) {
+		} else if strings.ToUpper(ce) != strings.ToUpper(encodingTypeBase64) {
 			return nil, nil, fmt.Errorf("unexpected %s: %s", transferEncodingHeader, ce)
 		}
 
